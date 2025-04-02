@@ -160,11 +160,11 @@ class _DashboardPageState extends State<DashboardPage> {
       body: Column(
         children: [
           
-          // SizedBox(height: 30,),
+      
           //! Search Bar
          Stack(
            children:[ Padding(
-             padding: const EdgeInsets.only(top: 40,),
+             padding: const EdgeInsets.only(top: 30,),
              child: Column(
                children: [
                 
@@ -178,7 +178,7 @@ class _DashboardPageState extends State<DashboardPage> {
              ),
            ),
              Padding(
-               padding: const EdgeInsets.only(left: 280,top: 50),
+               padding: const EdgeInsets.only(left: 280,top: 35),
                child: Container(
                      width: 60,
                      height: 60,
@@ -199,20 +199,244 @@ class _DashboardPageState extends State<DashboardPage> {
              ), 
                   ] ),
        
-        
+        SizedBox(height: 20,),
           
           //! Carousel
-          SizedBox(
-            height: 180,
-            child: PageView.builder(
-              controller: _pageController,
-              itemCount: cardColors.length,
-              itemBuilder: (context, index) {
-                return _buildCarouselCard(index);
-              },
+          // SizedBox(
+          //   height: 220,
+          //   child: PageView.builder(
+          //     controller: _pageController,
+          //     itemCount: cardColors.length,
+          //     itemBuilder: (context, index) {
+          //       return _buildCarouselCard(index);
+          //     },
+          //   ),
+          // ),
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                // Yellow Container
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Container(
+                    width: double.infinity,
+                    height: 230,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFFCF41),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Schedule icon and clock
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  width: 100,
+                                  height: 100,
+                                child: ClipRRect(borderRadius: BorderRadius.circular(60),child: Image.asset('asset/subscriptions-illustration-image.jpg', fit: BoxFit.fill,)),
+                                ),
+                              ),
+                              const Spacer(),
+                              // Subscriptions cards will be positioned absolutely
+                            ],
+                          ),
+                          const SizedBox(height: 22),
+                          
+                          // Subscriptions Button
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF3866E6),
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                              ),
+                              child: const Text('Subscriptions'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                
+                // "03 deliveries" card - positioned to be partially outside the yellow container
+                Positioned(
+                  top:-1,
+                  right: 70,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF3866E6),
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children:  [
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 45),
+                          child: Text(
+                            '03',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 4),
+                        Padding(
+                        padding: EdgeInsets.only(bottom: 45),
+                          child: Text(
+                            'deliveries',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                         Center(
+                           child: Padding(
+                             padding: const EdgeInsets.only(top: 22),
+                             child: _buildUserAvatars(maxAvatars: 2),
+                           ),
+                         ),
+                      ],
+                    ),
+                  ),
+                ),
+                
+                
+                // "10 Active Subscriptions" card
+                Positioned(
+                  top: 80,
+                  right: 76,
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    width: 120,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          children: [
+                            const Text(
+                              '10',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            Container(
+                              width: 50,
+                              height: 24,
+                              decoration: BoxDecoration(
+                                color: Colors.blue[50],
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CircleAvatar(
+                                    radius: 8,
+                                    backgroundColor: Colors.grey[300],
+                                  ),
+                                  const SizedBox(width: 2),
+                                  CircleAvatar(
+                                    radius: 8,
+                                    backgroundColor: Colors.orange[300],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Text(
+                          'Active\nSubscriptions',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                
+                // "119 Pending Deliveries" card
+                Positioned(
+                  top: 90,
+                  right: 16,
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    width: 120,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: const [
+                        Text(
+                          '119',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Text(
+                          'Pending\nDeliveries',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-          
+            
           // Calendar Section
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -379,7 +603,7 @@ class _DashboardPageState extends State<DashboardPage> {
       child: Container(
         decoration: BoxDecoration(
           color: cardColors[index],
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(25),
         ),
         child: cardContent,
       ),
@@ -408,8 +632,8 @@ class _DashboardPageState extends State<DashboardPage> {
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
-                      Image.network(
-                        'https://placehold.co/100x100',
+                      Image.asset(
+                    'asset/orders-illustration-image.jpg',
                         width: 80,
                         height: 80,
                       ),
@@ -561,141 +785,155 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   // ----------- O R D E R S  D A S H B O A R D -----------
-  Widget _buildOrdersDashboard() {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Row(
-        children: [
-          // Left side - Document icon
-          Expanded(
-            flex: 2,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 120,
-                  height: 120,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Image.network(
-                    'https://placehold.co/100x100',
+Widget _buildOrdersDashboard() {
+  return Padding(
+    padding: const EdgeInsets.all(16),
+    child: Row(
+      children: [
+        // Left side - Document icon
+        Expanded(
+          flex: 2,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 120,
+                height: 120,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(809),
+                  child: Image.asset(
+                    'asset/orders-illustration-image.jpg',
                     width: 80,
                     height: 80,
                   ),
                 ),
-                const SizedBox(height: 8),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFF97360),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+              ),
+              const SizedBox(height: 8),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFF97360),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 39),
+                ),
+                onPressed: () {},
+                child: Text('Orders', style: GoogleFonts.aBeeZee(color: Colors.white, fontWeight: FontWeight.bold)),
+              ),
+            ],
+          ),
+        ),
+        
+        //! Right side - Stats
+        Expanded(
+          flex: 3,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Active Orders
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 30),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 255, 99, 37),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                  ),
-                  onPressed: () {},
-                  child: const Text('Orders'),
-                ),
-              ],
-            ),
-          ),
-          
-          // Right side - Stats
-          Expanded(
-            flex: 3,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Active Orders
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF97360),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text(
-                        'You have',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: const [
+                        Text(
+                          'You have 3 active',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 4),
-                      const Text(
-                        '3',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                        SizedBox(height: 4),
+                        Text(
+                          'orders from',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 4),
-                      const Text(
-                        'active orders from',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      _buildUserAvatars(),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                
-                const SizedBox(height: 16),
-                
-                // Pending Orders
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8),
+                  Positioned(
+                    bottom: -20,
+                    left: 0, 
+                    right: 0,
+                    child: Center(
+                      child: _buildUserAvatars(),
+                    ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: const [
-                          Text(
-                            '02',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                ],
+              ),
+              
+
+              
+              // Pending Orders
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 30),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: const [
+                            Text(
+                              '02',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Color(0xFF273d66),
+                              ),
                             ),
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            'Pending',
-                            style: TextStyle(fontSize: 14),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          const Text(
-                            'Orders from',
-                            style: TextStyle(fontSize: 14),
-                          ),
-                          const SizedBox(width: 8),
-                          _buildUserAvatars(maxAvatars: 2),
-                        ],
-                      ),
-                    ],
+                            SizedBox(width: 8),
+                            Text(
+                              'Pending',
+                              style: TextStyle(fontSize: 14, color: Colors.grey),
+                            ),
+                          ],
+                        ),
+                        const Text(
+                          'Orders from',
+                          style: TextStyle(fontSize: 14, color: Colors.grey),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
+                  Positioned(
+                    bottom: -20,
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: _buildUserAvatars(maxAvatars: 2),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}
 
   // ----------- C U S T O M E R S  D A S H B O A R D -----------
   Widget _buildCustomersDashboard() {
@@ -716,8 +954,8 @@ class _DashboardPageState extends State<DashboardPage> {
                     color: Colors.white,
                     shape: BoxShape.circle,
                   ),
-                  child: Image.network(
-                    'https://placehold.co/100x100',
+                  child: Image.asset(
+                'asset/orders-illustration-image.jpg',
                     width: 80,
                     height: 80,
                   ),
@@ -812,7 +1050,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         height: 20,
                         decoration: const BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage('https://placehold.co/80x20'),
+                            image: AssetImage('asset/orders-illustration-image.jpg'),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -863,28 +1101,30 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   // ----------- U S E R  A V A T A R S -----------
-  Widget _buildUserAvatars({int maxAvatars = 3}) {
-    return SizedBox(
-      height: 30,
-      child: Stack(
-        children: List.generate(maxAvatars, (index) {
-          return Positioned(
-            left: index * 20.0,
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 2),
-              ),
-              child: const CircleAvatar(
-                radius: 15,
-                backgroundImage: NetworkImage('https://placehold.co/30x30'),
-              ),
+Widget _buildUserAvatars({int maxAvatars = 3}) {
+  return SizedBox(
+    height: 40,
+    width: 80,
+    child: Stack(
+      clipBehavior: Clip.none,
+      children: List.generate(maxAvatars, (index) {
+        return Positioned(
+          left: index * 25.0,
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: Color(0xFF3866E6), width: 2),
             ),
-          );
-        }),
-      ),
-    );
-  }
+            child: CircleAvatar(
+              radius: 15,
+              backgroundImage: AssetImage('asset/orders-illustration-image.jpg'),
+            ),
+          ),
+        );
+      }),
+    ),
+  );
+}
 
   // ----------- C A L E N D A R  D A Y S -----------
   Widget _buildCalendarDays() {

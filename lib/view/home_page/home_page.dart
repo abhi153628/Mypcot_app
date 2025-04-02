@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mypcot_assesment/view/home_page/widget/bottom_navigation_bar.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -24,9 +25,11 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color(0xFFffffff),
+      
       //! ----------- A P P B A R -----------
      appBar: AppBar(
-  backgroundColor: Colors.white,
+  backgroundColor: Color(0xFFffffff),
   elevation: 0,
   automaticallyImplyLeading: false,
   title: Padding(
@@ -46,17 +49,14 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ],
       ),
-      child: IconButton(
-        icon:  Icon(Icons.menu, color: Colors.indigo[900]),
-        onPressed: () {},
-      ),
+      child: ClipRRect(borderRadius: BorderRadius.circular(20),child: Image.asset('asset/≡ƒôì Leading Icon l Use High Emphasis.jpg',fit: BoxFit.fill,))
     ),
   ),
   actions: [
-    // Favorite icon with border
+    //! Favorite icon with border
     Container(
-      width: 40,
-      height: 40,
+      width: 35,
+      height: 35,
       margin: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -69,23 +69,19 @@ class _DashboardPageState extends State<DashboardPage> {
         
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withOpacity(0.3),
             spreadRadius: 1,
-            blurRadius: 5,
+            blurRadius: 7,
             offset: const Offset(0, 2),
           )],
       ),
-      child: IconButton(
-        icon: const Icon(
-          Icons.favorite_outline,
-          color: Colors.grey,
-        ),
-        iconSize: 20,
-        onPressed: () {},
-      ),
+      child: SizedBox(height: 20,child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Image.asset('asset/pngtree-favourite-icon-design-png-image_1014864-removebg-preview.png', ),
+      ))
     ),
     
-    // Notification icon with shadow
+    //! Notification icon with shadow
     Container(
       width: 40,
       height: 40,
@@ -96,8 +92,8 @@ class _DashboardPageState extends State<DashboardPage> {
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 5,
+            spreadRadius: 2,
+            blurRadius: 6,
             offset: const Offset(0, 2),
           ),
         ],
@@ -105,7 +101,7 @@ class _DashboardPageState extends State<DashboardPage> {
       child: Stack(
         alignment: Alignment.center,
         children: [
-         Image.asset('asset/≡ƒôìTrailing icon 1.jpg', height: 90,),
+         ClipRRect(borderRadius: BorderRadius.circular(20),child: Image.asset('asset/≡ƒôìTrailing icon 1.jpg', height: 90,)),
           Positioned(
             top: -0.1,
             right: 5,
@@ -134,7 +130,7 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
     ),
     
-    // Profile avatar
+    //! Profile avatar
     Container(
       width: 40,
       height: 40,
@@ -160,29 +156,52 @@ class _DashboardPageState extends State<DashboardPage> {
   ],
 ),
       
-      // ----------- B O D Y -----------
+      //! ----------- B O D Y -----------
       body: Column(
         children: [
-          // Search Bar
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.grey[100],
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: const TextField(
-                decoration: InputDecoration(
-                  hintText: 'Search',
-                  prefixIcon: Icon(Icons.search),
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(vertical: 12),
-                ),
-              ),
-            ),
-          ),
           
-          // Carousel
+          // SizedBox(height: 30,),
+          //! Search Bar
+         Stack(
+           children:[ Padding(
+             padding: const EdgeInsets.only(top: 40,),
+             child: Column(
+               children: [
+                
+                 Text('Welcome, Mypcot !!',style: GoogleFonts.roboto(fontSize: 23,fontWeight: FontWeight.w600,color: Color(0xFF273d66)),),
+                  SizedBox(height: 5,),
+                Padding(
+                      padding: const EdgeInsets.only(right: 20,),
+                  child: Text('here is your dashboard....',style: GoogleFonts.roboto(fontSize: 15,fontWeight: FontWeight.w600,color: Color(0xFF273d66)),),
+                ),
+              ],
+             ),
+           ),
+             Padding(
+               padding: const EdgeInsets.only(left: 280,top: 50),
+               child: Container(
+                     width: 60,
+                     height: 60,
+                     decoration: BoxDecoration(
+                       color: Colors.white,
+                       shape: BoxShape.circle,
+                       boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 6,
+                  offset: const Offset(0, 2),
+                ),
+                       ],
+                     ),
+                     child: IconButton(onPressed: (){}, icon: Icon(Icons.search,color: Color(0xFF273d66),size: 40,))
+                   ),
+             ), 
+                  ] ),
+       
+        
+          
+          //! Carousel
           SizedBox(
             height: 180,
             child: PageView.builder(

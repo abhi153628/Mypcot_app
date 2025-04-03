@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mypcot_assesment/view/home_page/widget/bottom_navigation_bar.dart';
+import 'dart:math' as math;
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -199,7 +200,7 @@ class _DashboardPageState extends State<DashboardPage> {
              ), 
                   ] ),
        
-        SizedBox(height: 20,),
+        SizedBox(height: 5,),
           
           //! Carousel
           // SizedBox(
@@ -212,230 +213,244 @@ class _DashboardPageState extends State<DashboardPage> {
           //     },
           //   ),
           // ),
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                // Yellow Container
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Container(
-                    width: double.infinity,
-                    height: 230,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFFCF41),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Schedule icon and clock
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  width: 100,
-                                  height: 100,
-                                child: ClipRRect(borderRadius: BorderRadius.circular(60),child: Image.asset('asset/subscriptions-illustration-image.jpg', fit: BoxFit.fill,)),
-                                ),
-                              ),
-                              const Spacer(),
-                              // Subscriptions cards will be positioned absolutely
-                            ],
-                          ),
-                          const SizedBox(height: 22),
-                          
-                          // Subscriptions Button
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFF3866E6),
-                                foregroundColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                              ),
-                              child: const Text('Subscriptions'),
-                            ),
-                          ),
-                        ],
+          Stack(
+  clipBehavior: Clip.none,
+  children: [
+    // Yellow Container
+    Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Container(
+        width: double.infinity,
+        height: 252,
+        decoration: BoxDecoration(
+          color: const Color(0xFF31ce95),
+          borderRadius: BorderRadius.circular(20),
+           boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 16, top: 30, right: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Schedule icon and clock
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 130,
+                    height: 130,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(60),
+                      child: Image.asset(
+                        'asset/customers-illustration-image-removebg-preview (1).png',
+                        fit: BoxFit.fill,
                       ),
                     ),
                   ),
-                ),
-                
-                // "03 deliveries" card - positioned to be partially outside the yellow container
-                Positioned(
-                  top:-1,
-                  right: 70,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF3866E6),
-                      borderRadius: BorderRadius.circular(8),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 4,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
+                ],
+              ),
+              const Spacer(),
+              //! Customers button 
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFFce316a),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
                     ),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  ),
+                  child:  Text('View Customers',style: GoogleFonts.aBeeZee(fontWeight: FontWeight.bold,fontSize: 15),),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+     //! "10 Active Subscriptions" card
+     Positioned(
+      top: 100,
+      right: 30,
+      child: Container(
+        padding: const EdgeInsets.all(1),
+        width: 140,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20,top: 2),
+                  child:  Text(
+                    '1.8%',
+                    style: GoogleFonts.roboto(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF2D3748),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+              const Icon(Icons.arrow_upward,color:  Color(0xFF31ce95),size: 35,)
+              ],
+            ),
+            const SizedBox(height: 2),
+           
+         Padding(
+           padding: const EdgeInsets.only(left: 20,),
+           child: Image.asset('asset/Screenshot_2025-04-03_221651-removebg-preview (1).png'),
+         )
+          ],
+        ),
+      ),
+    ),
+
+    //! "03 deliveries" card with user avatars
+    Positioned(
+      top: 5,
+      right: 50,
+      child: Container(
+        width: 160,
+        padding: const EdgeInsets.symmetric(horizontal: 21, vertical: 9),
+        decoration: BoxDecoration(
+          color: const Color(0xFF3866E6),
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: const [
+                Text(
+                  '03',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(width: 6),
+                Text(
+                  'deliveries',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
                     
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children:  [
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 45),
-                          child: Text(
-                            '03',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 4),
-                        Padding(
-                        padding: EdgeInsets.only(bottom: 45),
-                          child: Text(
-                            'deliveries',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                         Center(
-                           child: Padding(
-                             padding: const EdgeInsets.only(top: 22),
-                             child: _buildUserAvatars(maxAvatars: 2),
-                           ),
-                         ),
-                      ],
-                    ),
-                  ),
-                ),
-                
-                
-                // "10 Active Subscriptions" card
-                Positioned(
-                  top: 80,
-                  right: 76,
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    width: 120,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 4,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          children: [
-                            const Text(
-                              '10',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
-                            const SizedBox(width: 6),
-                            Container(
-                              width: 50,
-                              height: 24,
-                              decoration: BoxDecoration(
-                                color: Colors.blue[50],
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  CircleAvatar(
-                                    radius: 8,
-                                    backgroundColor: Colors.grey[300],
-                                  ),
-                                  const SizedBox(width: 2),
-                                  CircleAvatar(
-                                    radius: 8,
-                                    backgroundColor: Colors.orange[300],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Text(
-                          'Active\nSubscriptions',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                
-                // "119 Pending Deliveries" card
-                Positioned(
-                  top: 90,
-                  right: 16,
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    width: 120,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 4,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: const [
-                        Text(
-                          '119',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                        Text(
-                          'Pending\nDeliveries',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
+                  
                   ),
                 ),
               ],
             ),
+            const SizedBox(height: 6),
+            Padding(
+              padding: const EdgeInsets.only(right: 50,top: 3),
+              child: _buildUserAvatars(maxAvatars: 3,assetImages: ['asset/IPL-Opening-11_1743655111241_1743655161350.avif','asset/bollywood-actor-salman-khan-at-nika-mukesh-ambani-cultural-center-nmacc-mumbai-india.webp', 'asset/Deepika_Padukone_Cannes_2018_(cropped).jpg'] ),
+            ),
+          ],
+        ),
+      ),
+    ),
+      Padding(
+              padding: const EdgeInsets.only(right: 50,top: 3),
+              child:Container(decoration: BoxDecoration(shape: BoxShape.circle,color: Colors.white,),)
+            ),
+    
+   
+
+   
+    
+    //! "119 Pending Deliveries" card
+    Positioned(
+      top: 190,
+      right: 80,
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        width: 110,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children:  [
+            Row(
+              children: [
+                Text(
+                  '10',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF2D3748),
+                  ),
+                ),
+                    SizedBox(width: 6),
+                 Text(
+              'Active ',
+              style: TextStyle(
+                fontSize: 14,
+                color: Color(0xFF718096),
+                fontWeight: FontWeight.bold
+              ),
+            ),
+             
+              ],
+            ),
+        
+           
+            Text(
+              'Customers',
+              style: TextStyle(
+                fontSize: 16,
+              color: Color.fromARGB(255, 85, 96, 113),
+                fontWeight: FontWeight.bold
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+      Padding(
+              padding:  EdgeInsets.only(left: 280,top: 200),
+              child: _buildUserAvatars(maxAvatars: 3,assetImages: ['asset/IPL-Opening-11_1743655111241_1743655161350.avif','asset/bollywood-actor-salman-khan-at-nika-mukesh-ambani-cultural-center-nmacc-mumbai-india.webp', 'asset/Deepika_Padukone_Cannes_2018_(cropped).jpg'], avatarRadius: 15, spacing: 23, borderColor: Color(0xFF48c4e5) ),
+            ),
+  ],
+),
             
           // Calendar Section
           Padding(
@@ -1101,23 +1116,39 @@ Widget _buildOrdersDashboard() {
   }
 
   // ----------- U S E R  A V A T A R S -----------
-Widget _buildUserAvatars({int maxAvatars = 3}) {
+Widget _buildUserAvatars({
+  int maxAvatars = 3,
+  List<String>? assetImages,
+    double avatarRadius = 23.0,
+    Color borderColor = const Color(0xFF3866E6),
+      double spacing = 33.0,
+}) {
+  // Default images if none provided
+  final List<String> images = assetImages ?? [
+    'asset/subwaysurfers_01.png',
+    'asset/≡ƒôì Leading Icon l Use High Emphasis.jpg',
+    'asset/≡ƒôìTrailing icon 1.jpg',
+  ];
+  
+  // Use the minimum between provided images and maxAvatars
+  final int avatarCount = math.min(images.length, maxAvatars);
+  
   return SizedBox(
-    height: 40,
-    width: 80,
+    height: 30,
+    width: 90,
     child: Stack(
       clipBehavior: Clip.none,
-      children: List.generate(maxAvatars, (index) {
+      children: List.generate(avatarCount, (index) {
         return Positioned(
-          left: index * 25.0,
+          left: index * spacing,// Reduced spacing for better overlap like in image
           child: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: Color(0xFF3866E6), width: 2),
+              border: Border.all(color: borderColor, width: 2),
             ),
             child: CircleAvatar(
-              radius: 15,
-              backgroundImage: AssetImage('asset/orders-illustration-image.jpg'),
+            radius: avatarRadius,
+              backgroundImage: AssetImage(images[index]),
             ),
           ),
         );
@@ -1125,6 +1156,7 @@ Widget _buildUserAvatars({int maxAvatars = 3}) {
     ),
   );
 }
+
 
   // ----------- C A L E N D A R  D A Y S -----------
   Widget _buildCalendarDays() {

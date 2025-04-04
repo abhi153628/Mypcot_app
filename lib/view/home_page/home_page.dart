@@ -24,12 +24,12 @@ class _DashboardPageState extends State<DashboardPage> {
   final Color _primaryColor = const Color(0xFF273d66);
   final Color _accentColor = const Color(0xFFff6c35);
   final Color _calendarHighlightColor = const Color(0xFF10817e);
-  final Color _backgroundColor = const Color(0xFFffffff);
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _backgroundColor,
+      backgroundColor: Color.fromARGB(255, 245, 249, 249),
 
       //! ----------- A P P B A R -----------
       appBar: _buildAppBar(),
@@ -56,7 +56,7 @@ class _DashboardPageState extends State<DashboardPage> {
   /// Builds the app bar with menu, favorite, notification and profile icons
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
-      backgroundColor: _backgroundColor,
+      backgroundColor: Color.fromARGB(255, 245, 249, 249),
       elevation: 0,
       automaticallyImplyLeading: false,
       title: Padding(
@@ -409,7 +409,7 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget _buildFloatingActionButton() {
     return FloatingActionButton(
       shape: const CircleBorder(),
-      backgroundColor: const Color(0xFF34495E),
+      backgroundColor: const Color(0xFF21355b),
       child: const Icon(Icons.add, color: Colors.white),
       onPressed: () {},
     );

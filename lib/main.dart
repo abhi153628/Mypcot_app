@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mypcot_assesment/view/home_page/home_page.dart';
-import 'package:mypcot_assesment/view/home_page/widget/carousel.dart';
 import 'package:mypcot_assesment/view/splashscreen.dart';
 
 void main() {

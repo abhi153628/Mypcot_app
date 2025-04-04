@@ -12,6 +12,16 @@ This is a Flutter-based customer management application that provides a clean da
 - **Calendar Integration**: View scheduled activities with highlighted dates
 - **Timeline View**: Track activities chronologically
 
+## 📸 Screenshots
+
+### 🔻 Splash Screen
+![Splash Screen](asset/WhatsApp Image 2025-04-04 at 14.03.41_aef3d24f.jpg)
+
+### 🏠 Home Screen
+![Home Screen](asset/WhatsApp Image 2025-04-04 at 14.03.42_bcd5604a.jpg)
+
+---
+
 ## Project Structure
 ```
 mypcot_assessment/

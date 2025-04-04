@@ -19,7 +19,7 @@ class _ScreenSplash1State extends State<ScreenSplash1> {
       if (mounted) {
         Navigator.of(context).pushReplacement(
           PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) => DashboardPage(),
+            pageBuilder: (context, animation, secondaryAnimation) => HomePage(),
             transitionsBuilder: (context, animation, secondaryAnimation, child) {
               return FadeTransition(
                 opacity: animation,

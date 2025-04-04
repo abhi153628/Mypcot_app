@@ -10,8 +10,8 @@ import 'package:mypcot_assesment/view/home_page/widget/carousel.dart';
 
 /// A widget that displays the main dashboard of the application using ValueNotifier for state management.
 
-class DashboardPage extends StatelessWidget {
-  DashboardPage({super.key});
+class HomePage extends StatelessWidget {
+  HomePage({super.key});
 
   // Create a controller instance
   final NavigationController _navigationController = NavigationController();

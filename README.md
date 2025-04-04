@@ -30,7 +30,6 @@ mypcot_assessment/
 ├── lib/
 │   ├── controller/     # State management controllers
 │   │   └── state_controller.dart
-│   ├── modal/          # Data models
 │   └── view/           # UI components
 │       └── home_page/
 │           ├── home_page.dart

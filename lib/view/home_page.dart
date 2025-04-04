@@ -8,7 +8,8 @@ import 'package:mypcot_assesment/view/widgets/bottom_navigation_bar.dart';
 import 'package:mypcot_assesment/view/widgets/calender.dart';
 import 'package:mypcot_assesment/view/widgets/carousel.dart';
 
-/// the main dashboard of the application using ValueNotifier for state management.
+/// The main dashboard of the application using ValueNotifier for state management.
+/// This implementation includes responsive design to support different screen sizes.
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -23,14 +24,18 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get screen size for responsive calculations
+    final Size screenSize = MediaQuery.of(context).size;
+    final bool isSmallScreen = screenSize.width < 360;
+
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 245, 249, 249),
+      backgroundColor: const Color.fromARGB(255, 245, 249, 249),
 
       //! ----------- A P P B A R -----------
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(context),
 
       //! ----------- B O D Y -----------
-      body: FadeIn(duration: Duration(seconds: 2), child: _buildBody()),
+      body: FadeIn(duration: const Duration(seconds: 2), child: _buildBody(context)),
 
       //! ----------- F L O A T I N G  A C T I O N  B U T T O N -----------
       floatingActionButton: _buildFloatingActionButton(),
@@ -52,14 +57,26 @@ class HomePage extends StatelessWidget {
   }
 
   /// Builds the app bar with menu, favorite, notification and profile icons
-  PreferredSizeWidget _buildAppBar() {
+  /// Adjusted for responsive design based on screen width
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final bool isSmallScreen = screenWidth < 360;
+    
+    // Calculate sizes based on screen width
+    final double iconSize = isSmallScreen ? 35 : 40;
+    final double profileSize = isSmallScreen ? 40 : 45;
+    final EdgeInsets rightPadding = isSmallScreen ? 
+        const EdgeInsets.only(left: 4, right: 8) : 
+        const EdgeInsets.only(left: 8, right: 16);
+
     return AppBar(
-      backgroundColor: Color.fromARGB(255, 245, 249, 249),
+      backgroundColor: const Color.fromARGB(255, 245, 249, 249),
       elevation: 0,
       automaticallyImplyLeading: false,
       title: Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child: _buildCircularIconContainer(
+          size: iconSize,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Image.asset(
@@ -71,13 +88,22 @@ class HomePage extends StatelessWidget {
       ),
       actions: [
         //! Favorite icon with border
-        _buildFavoriteIcon(),
+        _buildFavoriteIcon(context),
 
         //! Notification icon with badge
-        _buildNotificationIconWithBadge(),
+        _buildNotificationIconWithBadge(context),
 
         //! Profile avatar
-        _buildProfileAvatar(),
+        _buildCircularIconContainer(
+          size: profileSize,
+          margin: rightPadding,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.asset(
+              'asset/Screenshot 2025-04-04 015824.png',
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -109,11 +135,15 @@ class HomePage extends StatelessWidget {
   }
 
   /// Builds the favorite icon in the app bar
-  Widget _buildFavoriteIcon() {
+  /// Adjusted for responsive design
+  Widget _buildFavoriteIcon(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double iconHeight = screenWidth < 360 ? 180 : 200;
+    
     return SizedBox(
-      height: 200,
+      height: iconHeight,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(screenWidth < 360 ? 4.0 : 8.0),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(60),
           child: Image.asset(
@@ -125,9 +155,18 @@ class HomePage extends StatelessWidget {
   }
 
   /// Builds the notification icon with a badge showing unread count
-  Widget _buildNotificationIconWithBadge() {
+  /// Adjusted for responsive design
+  Widget _buildNotificationIconWithBadge(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final bool isSmallScreen = screenWidth < 360;
+    final double iconSize = isSmallScreen ? 35 : 40;
+    final EdgeInsets horizontalMargin = isSmallScreen ? 
+        const EdgeInsets.symmetric(horizontal: 4) : 
+        const EdgeInsets.symmetric(horizontal: 8);
+    
     return _buildCircularIconContainer(
-      margin: const EdgeInsets.symmetric(horizontal: 8),
+      size: iconSize,
+      margin: horizontalMargin,
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -135,7 +174,7 @@ class HomePage extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             child: Image.asset(
               'asset/≡ƒôìTrailing icon 1.jpg',
-              height: 90,
+              height: isSmallScreen ? 80 : 90,
             ),
           ),
           Positioned(
@@ -172,27 +211,13 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  /// Builds the profile avatar in the app bar
-  Widget _buildProfileAvatar() {
-    return _buildCircularIconContainer(
-      size: 45,
-      margin: const EdgeInsets.only(left: 8, right: 16),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Image.asset(
-          'asset/Screenshot 2025-04-04 015824.png',
-        ),
-      ),
-    );
-  }
-
   /// Builds the main body content with scrollable content
-  Widget _buildBody() {
+  Widget _buildBody(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
           //! ----------- W E L C O M E  S E C T I O N -----------
-          _buildWelcomeSection(),
+          _buildWelcomeSection(context),
 
           const SizedBox(height: 5),
 
@@ -200,14 +225,20 @@ class HomePage extends StatelessWidget {
           const ScrollableContainers(),
 
           //! ----------- C A L E N D A R  &  O R D E R  S E C T I O N -----------
-          _buildCalendarAndOrderSection(),
+          _buildCalendarAndOrderSection(context),
         ],
       ),
     );
   }
 
   /// Builds the welcome section with greeting and search button
-  Widget _buildWelcomeSection() {
+  /// Made responsive for different screen sizes
+  Widget _buildWelcomeSection(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+    final bool isSmallScreen = screenSize.width < 360;
+    final double searchButtonRightPadding = isSmallScreen ? 
+        screenSize.width * 0.65 : 300;
+    
     return Stack(
       children: [
         Padding(
@@ -221,7 +252,7 @@ class HomePage extends StatelessWidget {
                     Text(
                       'Welcome,',
                       style: GoogleFonts.roboto(
-                        fontSize: 21,
+                        fontSize: isSmallScreen ? 16 : 19,
                         fontWeight: FontWeight.w500,
                         color: const Color.fromARGB(217, 39, 61, 102),
                       ),
@@ -229,7 +260,7 @@ class HomePage extends StatelessWidget {
                     Text(
                       ' Mypcot !!',
                       style: GoogleFonts.roboto(
-                        fontSize: 25,
+                        fontSize: isSmallScreen ? 19 : 23,
                         fontWeight: FontWeight.w600,
                         color: _primaryColor,
                       ),
@@ -237,15 +268,18 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 5),
+              const SizedBox(height: 3),
+              // Responsive padding calculation for subtitle
               Padding(
-                padding: const EdgeInsets.only(right: 180),
+                padding: EdgeInsets.only(
+                  right: isSmallScreen ? screenSize.width * 0.35 : 170,
+                ),
                 child: Text(
                   'here is your dashboard....',
                   style: GoogleFonts.roboto(
-                    fontSize: 15,
+                    fontSize: isSmallScreen ? 10 : 12,
                     fontWeight: FontWeight.w600,
-                    color: Color.fromARGB(217, 39, 61, 102),
+                    color: const Color.fromARGB(217, 39, 61, 102),
                   ),
                 ),
               ),
@@ -253,18 +287,25 @@ class HomePage extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 300, top: 35),
-          child: _buildSearchButton(),
+          padding: EdgeInsets.only(
+            left: searchButtonRightPadding, 
+            top: 35
+          ),
+          child: _buildSearchButton(context),
         ),
       ],
     );
   }
 
-  /// Builds the search button
-  Widget _buildSearchButton() {
+  /// Builds the search button with responsive size
+  Widget _buildSearchButton(BuildContext context) {
+    final bool isSmallScreen = MediaQuery.of(context).size.width < 360;
+    final double buttonSize = isSmallScreen ? 50 : 60;
+    final double iconSize = isSmallScreen ? 30 : 40;
+    
     return Container(
-      width: 60,
-      height: 60,
+      width: buttonSize,
+      height: buttonSize,
       decoration: BoxDecoration(
         color: Colors.white,
         shape: BoxShape.circle,
@@ -282,16 +323,16 @@ class HomePage extends StatelessWidget {
         icon: Icon(
           Icons.search,
           color: _primaryColor,
-          size: 40,
+          size: iconSize,
         ),
       ),
     );
   }
 
   /// Builds the calendar section and new order card
-  Widget _buildCalendarAndOrderSection() {
+  Widget _buildCalendarAndOrderSection(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -299,17 +340,19 @@ class HomePage extends StatelessWidget {
           const CalendarHeader(),
 
           //! ----------- C A L E N D A R  D A Y S -----------
-          _buildCalendarDays(),
+          _buildCalendarDays(context),
 
           //! ----------- N E W  O R D E R  C A R D -----------
-          _buildNewOrderCard(),
+          _buildNewOrderCard(context),
         ],
       ),
     );
   }
 
   /// Builds the calendar days display with the selected day highlighted
-  Widget _buildCalendarDays() {
+  /// Made responsive for different screen sizes
+  Widget _buildCalendarDays(BuildContext context) {
+    final bool isSmallScreen = MediaQuery.of(context).size.width < 360;
     final List<String> days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
     final List<String> dates = ['20', '21', '22', '23', '24', '25', '26'];
     int selectedDay = 3; // Thursday (index 3)
@@ -324,7 +367,7 @@ class HomePage extends StatelessWidget {
             Text(
               days[index],
               style: TextStyle(
-                fontSize: 14,
+                fontSize: isSmallScreen ? 10 : 12,
                 color: isSelected ? _calendarHighlightColor : Colors.grey,
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
               ),
@@ -333,7 +376,7 @@ class HomePage extends StatelessWidget {
             Text(
               dates[index],
               style: TextStyle(
-                fontSize: 16,
+                fontSize: isSmallScreen ? 12 : 14,
                 fontWeight: FontWeight.bold,
                 color: isSelected ? _calendarHighlightColor : Colors.black,
               ),
@@ -355,12 +398,15 @@ class HomePage extends StatelessWidget {
   }
 
   /// Builds the new order card with details and image
-  Widget _buildNewOrderCard() {
+  /// Made responsive for different screen sizes
+  Widget _buildNewOrderCard(BuildContext context) {
+    final bool isSmallScreen = MediaQuery.of(context).size.width < 360;
+    
     return Container(
       margin: const EdgeInsets.only(top: 16),
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
       decoration: BoxDecoration(
-        color: Colors.white70,
+        color: const Color(0xFFffffff),
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -373,45 +419,51 @@ class HomePage extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'New order created',
-                  style: GoogleFonts.roboto(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: _primaryColor,
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(isSmallScreen ? 4.0 : 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'New order created',
+                    style: GoogleFonts.roboto(
+                      fontSize: isSmallScreen ? 12 : 14,
+                      fontWeight: FontWeight.bold,
+                      color: _primaryColor,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 5),
-                const Text(
-                  'New Order created with Order',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w400,
+                  const SizedBox(height: 5),
+                  Text(
+                    'New Order created with Order',
+                    style: TextStyle(
+                      fontSize: isSmallScreen ? 10 : 12,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 18),
-                Text(
-                  '09:00 AM',
-                  style: TextStyle(
-                    fontSize: 15,
+                  SizedBox(height: isSmallScreen ? 12 : 18),
+                  Text(
+                    '09:00 AM',
+                    style: TextStyle(
+                      fontSize: isSmallScreen ? 9 : 10,
+                      color: _accentColor,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: isSmallScreen ? 6 : 10),
+                  Icon(
+                    Icons.arrow_forward, 
                     color: _accentColor,
-                    fontWeight: FontWeight.w600,
+                    size: isSmallScreen ? 18 : 24,
                   ),
-                ),
-                const SizedBox(height: 10),
-                Icon(Icons.arrow_forward, color: _accentColor),
-              ],
+                ],
+              ),
             ),
           ),
           Image.asset(
             'asset/Screenshot 2025-04-04 015228.png',
-            height: 96,
+            height: isSmallScreen ? 50 : 60,
           ),
         ],
       ),
@@ -419,12 +471,28 @@ class HomePage extends StatelessWidget {
   }
 
   /// Builds the floating action button
+  /// Size adjusts based on screen dimensions
   Widget _buildFloatingActionButton() {
-    return FloatingActionButton(
-      shape: const CircleBorder(),
-      backgroundColor: const Color(0xFF21355b),
-      child: const Icon(Icons.add, color: Colors.white),
-      onPressed: () {},
+    return Builder(
+      builder: (context) {
+        final bool isSmallScreen = MediaQuery.of(context).size.width < 360;
+        final double buttonSize = isSmallScreen ? 48 : 56;
+        
+        return SizedBox(
+          height: buttonSize,
+          width: buttonSize,
+          child: FloatingActionButton(
+            shape: const CircleBorder(),
+            backgroundColor: const Color(0xFF21355b),
+            child: Icon(
+              Icons.add, 
+              color: Colors.white,
+              size: isSmallScreen ? 20 : 24,
+            ),
+            onPressed: () {},
+          ),
+        );
+      }
     );
   }
 }

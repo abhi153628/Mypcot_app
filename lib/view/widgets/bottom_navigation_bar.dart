@@ -48,15 +48,15 @@ class BottomNavBar extends StatelessWidget {
         children: [
           Image.asset(
             imagePath,
-            width: 34,
-            height: 34,
+            width: 24,
+            height: 24,
           
           ),
           Text(
             label,
             style: TextStyle(
               color: isSelected ? Color(0xFF21355b) : Colors.grey,
-              fontSize: 14,
+              fontSize: 10,
               fontWeight: FontWeight.w500
             ),
           ),

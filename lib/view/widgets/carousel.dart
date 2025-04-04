@@ -51,7 +51,7 @@ class ScrollableContainers extends StatelessWidget {
 
     return SizedBox(
       height: 30,
-      width: 90,
+      width: spacing * avatarCount, // Dynamic width based on avatar count and spacing
       child: Stack(
         clipBehavior: Clip.none,
         children: List.generate(avatarCount, (index) {
@@ -75,15 +75,18 @@ class ScrollableContainers extends StatelessWidget {
 
   //! Blue container - Orders
   Widget _buildBlueContainer(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final containerWidth = math.min(screenWidth * 0.91, 350.0); // Cap the max width
+    
     return Stack(
       clipBehavior: Clip.none,
       children: [
         // Main container
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(10),
           child: Container(
-            width: MediaQuery.of(context).size.width * 0.91,
-            height: 252,
+            width: containerWidth,
+       height: 285,
             decoration: BoxDecoration(
               color: const Color(0xFF019acb),
               borderRadius: BorderRadius.circular(20),
@@ -139,7 +142,7 @@ class ScrollableContainers extends StatelessWidget {
                       child: Text(
                         'Orders',
                         style: GoogleFonts.roboto(
-                            fontWeight: FontWeight.w500, fontSize: 17),
+                            fontWeight: FontWeight.w500, fontSize: 12),
                       ),
                     ),
                   ),
@@ -152,7 +155,7 @@ class ScrollableContainers extends StatelessWidget {
         // "You have 3 active" card
         Positioned(
           top: 5,
-          right: 50,
+          right: screenWidth < 360 ? 35 : 50, // Adjust position based on screen width
           child: Container(
             width: 160,
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 2),
@@ -170,11 +173,12 @@ class ScrollableContainers extends StatelessWidget {
             child: Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center, // Center the content
                   children: const [
                     Text(
                       'You have',
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 10,
                         fontWeight: FontWeight.w500,
                         color: Colors.white,
                       ),
@@ -183,7 +187,7 @@ class ScrollableContainers extends StatelessWidget {
                     Text(
                       '3',
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 23,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
@@ -191,7 +195,7 @@ class ScrollableContainers extends StatelessWidget {
                     Text(
                       'active',
                       style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 10,
                           color: Colors.white,
                           fontWeight: FontWeight.w500),
                     ),
@@ -200,12 +204,12 @@ class ScrollableContainers extends StatelessWidget {
                 Text(
                   'orders from',
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 12,
                     color: Colors.white,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 22, top: 3),
+                  padding: const EdgeInsets.only(right: 22, top: 5),
                   child: _buildUserAvatars(
                     maxAvatars: 3,
                     assetImages: [
@@ -214,6 +218,7 @@ class ScrollableContainers extends StatelessWidget {
                       'asset/Deepika_Padukone_Cannes_2018_(cropped).jpg'
                     ],
                     borderColor: const Color.fromARGB(255, 255, 107, 49),
+                    avatarRadius: 20
                   ),
                 ),
               ],
@@ -224,7 +229,7 @@ class ScrollableContainers extends StatelessWidget {
         // "Pending Orders" card
         Positioned(
           top: 130,
-          right: 50,
+          right: screenWidth < 360 ? 35 : 50, // Adjust position based on screen width
           child: Container(
             padding: const EdgeInsets.all(8),
             width: 120,
@@ -248,18 +253,21 @@ class ScrollableContainers extends StatelessWidget {
                     Text(
                       '02',
                       style: TextStyle(
-                        fontSize: 27,
+                        fontSize: 23,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF2D3748),
                       ),
                     ),
                     SizedBox(width: 8),
-                    Text(
-                      'Pending ',
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFF718096),
-                          fontWeight: FontWeight.bold),
+                    Flexible(
+                      child: Text(
+                        'Pending ',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 10,
+                            color: Color(0xFF718096),
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 ),
@@ -268,7 +276,7 @@ class ScrollableContainers extends StatelessWidget {
                   child: Text(
                     'Orders from',
                     style: TextStyle(
-                        fontSize: 17,
+                        fontSize: 10,
                         color: Color.fromARGB(255, 85, 96, 113),
                         fontWeight: FontWeight.w500),
                   ),
@@ -279,8 +287,9 @@ class ScrollableContainers extends StatelessWidget {
         ),
 
         // Avatars for pending orders
-        Padding(
-          padding: EdgeInsets.only(left: 230, top: 195),
+        Positioned(
+          right: screenWidth < 360 ? 30 : 80,
+          bottom: 75,
           child: _buildUserAvatars(
             maxAvatars: 2,
             assetImages: [
@@ -298,15 +307,18 @@ class ScrollableContainers extends StatelessWidget {
 
   //! Yellow container - Subscriptions
   Widget _buildYellowContainer(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final containerWidth = math.min(screenWidth * 0.91, 350.0); // Cap the max width
+    
     return Stack(
       clipBehavior: Clip.none,
       children: [
         // Main container
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(10),
           child: Container(
-            width: MediaQuery.of(context).size.width * 0.91,
-            height: 252,
+            width: containerWidth,
+       height: 285,
             decoration: BoxDecoration(
               color: const Color(0xFFe1a800),
               borderRadius: BorderRadius.circular(20),
@@ -358,7 +370,7 @@ class ScrollableContainers extends StatelessWidget {
                       child: Text(
                         'Subscriptions',
                         style: GoogleFonts.roboto(
-                            fontWeight: FontWeight.w500, fontSize: 15),
+                            fontWeight: FontWeight.w500, fontSize: 10),
                       ),
                     ),
                   ),
@@ -371,7 +383,7 @@ class ScrollableContainers extends StatelessWidget {
         // "Active Subscriptions" card
         Positioned(
           top: 100,
-          right: 55,
+          right: screenWidth < 360 ? 40 : 55,
           child: Container(
             padding: const EdgeInsets.all(8),
             width: 130,
@@ -395,28 +407,34 @@ class ScrollableContainers extends StatelessWidget {
                     Text(
                       '10',
                       style: TextStyle(
-                        fontSize: 26,
+                        fontSize: 23,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
                     ),
                     SizedBox(width: 8),
-                    Text(
-                      'Active',
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFF718096),
-                          fontWeight: FontWeight.bold),
+                    Flexible(
+                      child: Text(
+                        'Active',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 10,
+                            color: Color(0xFF718096),
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 2),
-                const Text(
-                  'Subscriptions',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Color.fromARGB(255, 56, 63, 74),
+                const Flexible(
+                  child: Text(
+                    'Subscriptions',
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: Color.fromARGB(255, 56, 63, 74),
+                    ),
                   ),
                 ),
               ],
@@ -427,7 +445,7 @@ class ScrollableContainers extends StatelessWidget {
         // "Deliveries" card
         Positioned(
           top: 5,
-          right: 50,
+          right: screenWidth < 360 ? 35 : 50,
           child: Container(
             width: 160,
             padding: const EdgeInsets.symmetric(horizontal: 21, vertical: 9),
@@ -444,34 +462,39 @@ class ScrollableContainers extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Row(
-                  children: const [
-                    Text(
-                      '03',
-                      style: TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        '03',
+                        style: TextStyle(
+                          fontSize: 23,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 6),
-                    Text(
-                      'deliveries',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
+                      SizedBox(width: 6),
+                      Text(
+                        'deliveries',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 6),
                 Padding(
-                  padding: const EdgeInsets.only(right: 50, top: 3),
+                  padding: const EdgeInsets.only(right: 50, top: 6),
                   child: _buildUserAvatars(maxAvatars: 3, assetImages: [
                     'asset/IPL-Opening-11_1743655111241_1743655161350.avif',
                     'asset/bollywood-actor-salman-khan-at-nika-mukesh-ambani-cultural-center-nmacc-mumbai-india.webp',
-                    'asset/Deepika_Padukone_Cannes_2018_(cropped).jpg'
-                  ]),
+                    'asset/Deepika_Padukone_Cannes_2018_(cropped).jpg',
+
+                  ],avatarRadius: 20),
                 ),
               ],
             ),
@@ -480,11 +503,11 @@ class ScrollableContainers extends StatelessWidget {
 
         // "Pending Deliveries" card
         Positioned(
-          top: 180,
-          right: 30,
+          top: 190,
+          right: screenWidth < 360 ? 20 : 30,
           child: Container(
             padding: const EdgeInsets.all(12),
-            width: 120,
+            width: screenWidth < 360 ? 110 : 130,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(12),
@@ -505,27 +528,33 @@ class ScrollableContainers extends StatelessWidget {
                     Text(
                       '119',
                       style: TextStyle(
-                        fontSize: 25,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
                     ),
                     SizedBox(width: 6),
-                    Text(
-                      'Pending',
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFF718096),
-                          fontWeight: FontWeight.bold),
+                    Flexible(
+                      child: Text(
+                        'Pending',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 10,
+                            color: Color(0xFF718096),
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 ),
-                Text(
-                  'Deliveries',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Color.fromARGB(255, 56, 63, 74),
+                Flexible(
+                  child: Text(
+                    'Deliveries',
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: Color.fromARGB(255, 56, 63, 74),
+                    ),
                   ),
                 ),
               ],
@@ -538,15 +567,18 @@ class ScrollableContainers extends StatelessWidget {
 
   //! Green container - Customers
   Widget _buildGreenContainer(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final containerWidth = math.min(screenWidth * 0.91, 350.0); // Cap the max width
+    
     return Stack(
       clipBehavior: Clip.none,
       children: [
         // Main container
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(10),
           child: Container(
-            width: MediaQuery.of(context).size.width * 0.91,
-            height: 252,
+            width: containerWidth,
+       height: 285,
             decoration: BoxDecoration(
               color: const Color(0xFF00cd85),
               borderRadius: BorderRadius.circular(20),
@@ -567,7 +599,7 @@ class ScrollableContainers extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
+                      SizedBox(
                         width: 130,
                         height: 130,
                         child: ClipRRect(
@@ -597,7 +629,7 @@ class ScrollableContainers extends StatelessWidget {
                       child: Text(
                         'View Customers',
                         style: GoogleFonts.roboto(
-                            fontWeight: FontWeight.w500, fontSize: 15),
+                            fontWeight: FontWeight.w500, fontSize: 10),
                       ),
                     ),
                   ),
@@ -610,7 +642,7 @@ class ScrollableContainers extends StatelessWidget {
         // Growth percentage card
         Positioned(
           top: 100,
-          right: 35,
+          right: screenWidth < 360 ? 25 : 35,
           child: Container(
             padding: const EdgeInsets.all(1),
             width: 140,
@@ -636,7 +668,7 @@ class ScrollableContainers extends StatelessWidget {
                       child: Text(
                         '1.8%',
                         style: GoogleFonts.roboto(
-                          fontSize: 33,
+                          fontSize: 23,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF2D3748),
                         ),
@@ -661,7 +693,7 @@ class ScrollableContainers extends StatelessWidget {
         // "New Customers" card
         Positioned(
           top: 5,
-          right: 50,
+          right: screenWidth < 360 ? 35 : 50,
           child: Container(
             width: 160,
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 9),
@@ -678,25 +710,29 @@ class ScrollableContainers extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Row(
-                  children: const [
-                    Text(
-                      '15',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        '15',
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 4),
-                    Text(
-                      'New Customers',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.white,
+                      SizedBox(width: 4),
+                      Text(
+                        'New Customers',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 6),
                 Padding(
@@ -708,7 +744,7 @@ class ScrollableContainers extends StatelessWidget {
                         'asset/bollywood-actor-salman-khan-at-nika-mukesh-ambani-cultural-center-nmacc-mumbai-india.webp',
                         'asset/Deepika_Padukone_Cannes_2018_(cropped).jpg'
                       ],
-                      borderColor: Color(0xFF2fddfa)),
+                      borderColor: Color(0xFF2fddfa),avatarRadius: 20),
                 ),
               ],
             ),
@@ -716,8 +752,9 @@ class ScrollableContainers extends StatelessWidget {
         ),
 
         // Add icon
-        Padding(
-          padding: const EdgeInsets.only(left: 295, top: 70),
+        Positioned(
+          right: screenWidth < 360 ? 30 : 70,
+          top: 70,
           child: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -734,7 +771,7 @@ class ScrollableContainers extends StatelessWidget {
         // "Active Customers" card
         Positioned(
           top: 190,
-          right: 80,
+          right: screenWidth < 360 ? 60 : 80,
           child: Container(
             padding: const EdgeInsets.all(8),
             width: 110,
@@ -758,27 +795,33 @@ class ScrollableContainers extends StatelessWidget {
                     Text(
                       '10',
                       style: TextStyle(
-                        fontSize: 26,
+                        fontSize: 23,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF2D3748),
                       ),
                     ),
                     SizedBox(width: 6),
-                    Text(
-                      'Active ',
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFF718096),
-                          fontWeight: FontWeight.bold),
+                    Flexible(
+                      child: Text(
+                        'Active ',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 10,
+                            color: Color(0xFF718096),
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 ),
-                Text(
-                  'Customers',
-                  style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500),
+                Flexible(
+                  child: Text(
+                    'Customers',
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500),
+                  ),
                 ),
               ],
             ),
@@ -786,8 +829,9 @@ class ScrollableContainers extends StatelessWidget {
         ),
 
         // Customer avatars
-        Padding(
-          padding: EdgeInsets.only(left: 280, top: 205),
+        Positioned(
+          right: screenWidth < 360 ? 20 : 30,
+          bottom: 60,
           child: _buildUserAvatars(
               maxAvatars: 3,
               assetImages: [

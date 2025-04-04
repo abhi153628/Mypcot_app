@@ -15,10 +15,10 @@ This is a Flutter-based customer management application that provides a clean da
 ## 📸 Screenshots
 
 ### 🔻 Splash Screen
-![Splash Screen](asset/WhatsApp Image 2025-04-04 at 14.03.41_aef3d24f.jpg)
+![Splash Screen](asset/WhatsApp%20Image%202025-04-04%20at%2014.03.41_aef3d24f.jpg)
 
 ### 🏠 Home Screen
-![Home Screen](asset/WhatsApp Image 2025-04-04 at 14.03.42_bcd5604a.jpg)
+![Home Screen](asset/WhatsApp%20Image%202025-04-04%20at%2014.03.42_bcd5604a.jpg)
 
 ---
 

@@ -3,28 +3,23 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mypcot_assesment/conntroller/state_controller.dart';
 import 'package:mypcot_assesment/view/home_page/widget/bottom_navigation_bar.dart';
 import 'package:mypcot_assesment/view/home_page/widget/calender.dart';
 import 'package:mypcot_assesment/view/home_page/widget/carousel.dart';
 
-/// A stateful widget that displays the main dashboard of the application.
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+/// A widget that displays the main dashboard of the application using ValueNotifier for state management.
 
-  @override
-  State<DashboardPage> createState() => _DashboardPageState();
-}
+class DashboardPage extends StatelessWidget {
+  DashboardPage({super.key});
 
-class _DashboardPageState extends State<DashboardPage> {
-  
-  // Bottom navigation bar selected index
-  int _selectedIndex = 0;
+  // Create a controller instance
+  final NavigationController _navigationController = NavigationController();
 
   // App theme colors
   final Color _primaryColor = const Color(0xFF273d66);
   final Color _accentColor = const Color(0xFFff6c35);
   final Color _calendarHighlightColor = const Color(0xFF10817e);
-
 
   @override
   Widget build(BuildContext context) {
@@ -35,19 +30,22 @@ class _DashboardPageState extends State<DashboardPage> {
       appBar: _buildAppBar(),
 
       //! ----------- B O D Y -----------
-      body: FadeIn(duration: Duration(seconds: 1), child: _buildBody()),
+      body: FadeIn(duration: Duration(seconds: 2), child: _buildBody()),
 
       //! ----------- F L O A T I N G  A C T I O N  B U T T O N -----------
       floatingActionButton: _buildFloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
       //! ----------- B O T T O M  N A V I G A T I O N  B A R -----------
-      bottomNavigationBar: BottomNavBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
+      bottomNavigationBar: ValueListenableBuilder<int>(
+        valueListenable: _navigationController.selectedIndexNotifier,
+        builder: (context, selectedIndex, _) {
+          return BottomNavBar(
+            selectedIndex: selectedIndex,
+            onItemTapped: (index) {
+              _navigationController.updateIndex(index);
+            },
+          );
         },
       ),
     );
@@ -216,23 +214,38 @@ class _DashboardPageState extends State<DashboardPage> {
           padding: const EdgeInsets.only(top: 30),
           child: Column(
             children: [
-              Text(
-                'Welcome, Mypcot !!',
-                style: GoogleFonts.roboto(
-                  fontSize: 23,
-                  fontWeight: FontWeight.w800,
-                  color: _primaryColor,
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Row(
+                  children: [
+                    Text(
+                      'Welcome,',
+                      style: GoogleFonts.roboto(
+                        fontSize: 21,
+                        fontWeight: FontWeight.w500,
+                        color: const Color.fromARGB(217, 39, 61, 102),
+                      ),
+                    ),
+                    Text(
+                      ' Mypcot !!',
+                      style: GoogleFonts.roboto(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w600,
+                        color: _primaryColor,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(height: 5),
               Padding(
-                padding: const EdgeInsets.only(right: 20),
+                padding: const EdgeInsets.only(right: 180),
                 child: Text(
                   'here is your dashboard....',
                   style: GoogleFonts.roboto(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
-                    color: _primaryColor,
+                    color: Color.fromARGB(217, 39, 61, 102),
                   ),
                 ),
               ),
@@ -240,7 +253,7 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 280, top: 35),
+          padding: const EdgeInsets.only(left: 300, top: 35),
           child: _buildSearchButton(),
         ),
       ],

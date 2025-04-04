@@ -5,26 +5,32 @@ class BottomNavBar extends StatelessWidget {
   final Function(int) onItemTapped;
   
   const BottomNavBar({
-    Key? key,
+    super.key,
     required this.selectedIndex,
     required this.onItemTapped,
-  }) : super(key: key);
+  });
   
   @override
  Widget build(BuildContext context) {
   return BottomAppBar(
     color: Color.fromARGB(255, 255, 255, 255),
-    shadowColor: Colors.grey[300], // Lighter shadow for subtle effect
-    elevation: 15, // Increased elevation for better shadow visibility
-    surfaceTintColor: Colors.transparent, // Remove tint color effect
-    shape: const CircularNotchedRectangle(),
+    shadowColor: Colors.grey[300], 
+    elevation: 15, 
+    surfaceTintColor: const Color.fromARGB(0, 0, 0, 0), 
+    shape: AutomaticNotchedShape(
+        RoundedRectangleBorder(),
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(40.0), 
+        ),
+      ),
+   
     notchMargin: 8.0,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         _buildNavItem(0, 'asset/Group 910.jpg', 'Home'),
         _buildNavItem(1, 'asset/Group 912.jpg', 'Customers'),
-        const SizedBox(width: 40), // Space for FAB
+        const SizedBox(width: 40),
         _buildNavItem(2, 'asset/Group 913.jpg', 'Khata'),
         _buildNavItem(3, 'asset/Group 914.jpg', 'Orders'),
       ],
@@ -49,8 +55,9 @@ class BottomNavBar extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              color: isSelected ? Colors.blue : Colors.grey,
-              fontSize: 12,
+              color: isSelected ? Color(0xFF21355b) : Colors.grey,
+              fontSize: 14,
+              fontWeight: FontWeight.w500
             ),
           ),
         ],

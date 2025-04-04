@@ -3,12 +3,12 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mypcot_assesment/conntroller/state_controller.dart';
-import 'package:mypcot_assesment/view/home_page/widget/bottom_navigation_bar.dart';
-import 'package:mypcot_assesment/view/home_page/widget/calender.dart';
-import 'package:mypcot_assesment/view/home_page/widget/carousel.dart';
+import 'package:mypcot_assesment/controller/state_controller.dart';
+import 'package:mypcot_assesment/view/widgets/bottom_navigation_bar.dart';
+import 'package:mypcot_assesment/view/widgets/calender.dart';
+import 'package:mypcot_assesment/view/widgets/carousel.dart';
 
-/// A widget that displays the main dashboard of the application using ValueNotifier for state management.
+/// the main dashboard of the application using ValueNotifier for state management.
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});

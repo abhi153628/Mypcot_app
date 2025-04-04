@@ -1,6 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:mypcot_assesment/view/home_page/home_page.dart';
+import 'package:mypcot_assesment/view/home_page.dart';
 
 class ScreenSplash1 extends StatefulWidget {
   const ScreenSplash1({super.key});
